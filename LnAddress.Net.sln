@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LnAddress.Net", "src/LnAddress.Net/LnAddress.Net.csproj", "{74E949D6-B945-46C5-A872-6F3574A8617E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{81A62922-7DC3-41EE-AE44-BCA84C5CA4AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{61DB1EED-DE7F-4AF3-88A1-6F9A0A1422F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LnAddress.Net.Tests", "tests\LnAddress.Net.Tests\LnAddress.Net.Tests.csproj", "{03910218-25EF-44BB-BAD5-5C8737EAF193}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{100BEDEF-376D-42E5-AF85-F4102060C9DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "custom_lnd", "custom_lnd", "{B73C3D34-0296-4DA6-9F9E-149353745495}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Docker\custom_lnd\Dockerfile = tests\Docker\custom_lnd\Dockerfile
+		tests\Docker\custom_lnd\docker-entrypoint.sh = tests\Docker\custom_lnd\docker-entrypoint.sh
+		tests\Docker\custom_lnd\bashrc = tests\Docker\custom_lnd\bashrc
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74E949D6-B945-46C5-A872-6F3574A8617E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E949D6-B945-46C5-A872-6F3574A8617E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E949D6-B945-46C5-A872-6F3574A8617E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E949D6-B945-46C5-A872-6F3574A8617E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03910218-25EF-44BB-BAD5-5C8737EAF193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03910218-25EF-44BB-BAD5-5C8737EAF193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03910218-25EF-44BB-BAD5-5C8737EAF193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03910218-25EF-44BB-BAD5-5C8737EAF193}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74E949D6-B945-46C5-A872-6F3574A8617E} = {81A62922-7DC3-41EE-AE44-BCA84C5CA4AC}
+		{03910218-25EF-44BB-BAD5-5C8737EAF193} = {61DB1EED-DE7F-4AF3-88A1-6F9A0A1422F3}
+		{100BEDEF-376D-42E5-AF85-F4102060C9DF} = {61DB1EED-DE7F-4AF3-88A1-6F9A0A1422F3}
+		{B73C3D34-0296-4DA6-9F9E-149353745495} = {100BEDEF-376D-42E5-AF85-F4102060C9DF}
+	EndGlobalSection
+EndGlobal
