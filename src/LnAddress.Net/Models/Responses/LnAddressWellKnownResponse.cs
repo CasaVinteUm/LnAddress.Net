@@ -50,7 +50,7 @@ public class LnAddressWellKnownResponse(string callback, long minSendableMillisa
 
     public LnAddressWellKnownResponse WithCommentAllowed(int? commentAllowed)
     {
-        CommentAllowed = commentAllowed;
+        CommentAllowed = commentAllowed > 0 ? commentAllowed : null;
         return this;
     }
 }

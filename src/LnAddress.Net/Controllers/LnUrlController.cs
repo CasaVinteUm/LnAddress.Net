@@ -1,27 +1,47 @@
-using LnAddress.Net.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LnAddress.Net.Controllers;
 
+using Interfaces;
 using Models.Responses;
 
 [ApiController]
 [Route("[controller]")]
-public class LnUrlController(ILightningService lightningService) : ControllerBase
+public class LnUrlController(ILightningService lightningService, IConfiguration configuration) : ControllerBase
 {
     [HttpGet("callback/{username}")]
     public async Task<ActionResult<LnUrlCallbackResponse>> Get(string username, [FromQuery] long amount, [FromQuery] string? comment)
     {
         try
         {
-            if (amount is < 1_000 or > 100_000_000)
+            if (!long.TryParse(configuration["Invoice:MinSendable"], out var minSendable))
+            {
+                minSendable = 1_000;
+            }
+            
+            if (!long.TryParse(configuration["Invoice:MaxSendable"], out var maxSendable))
+            {
+                maxSendable = 100_000_000;
+            }
+
+            int? commentAllowed = null;
+            if (int.TryParse(configuration["Invoice:MaxCommentAllowed"], out var commentAllowedFromConfig))
+            {
+                commentAllowed = commentAllowedFromConfig;
+            }
+            
+            if (amount < minSendable || amount > maxSendable)
             {
                 return BadRequest(new ErrorResponse("Amount is outside bounds."));
             }
 
-            if (comment?.Length > 256)
+            if (commentAllowed is null)
             {
-                comment = comment[..256];
+                comment = null;
+            }
+            else if(comment?.Length > commentAllowed.Value)
+            {
+                comment = comment[..commentAllowed.Value];
             }
 
             var pr = await lightningService.FetchInvoiceAsync(amount, username, comment);
