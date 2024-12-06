@@ -27,6 +27,7 @@ public class LnAddressWellKnownResponse(string callback, long minSendableMillisa
     /// at a later step
     /// </summary>
     [JsonPropertyName("metadata")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Metadata { get; private set; }
 
     /// <summary>
@@ -34,6 +35,7 @@ public class LnAddressWellKnownResponse(string callback, long minSendableMillisa
     /// Null if no comment allowed
     /// </summary>
     [JsonPropertyName("commentAllowed")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? CommentAllowed { get; private set; }
 
     /// <summary>
