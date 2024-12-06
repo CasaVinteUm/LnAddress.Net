@@ -1,0 +1,27 @@
+server {
+    server_name your.domain;
+    root /var/www/your.domain;
+    index index.html;
+
+    # make sure this two blocks comes first
+    location /.well-known/lnurlp/ {
+        proxy_pass http://localhost:65535;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /lnurl/ {
+        proxy_pass http://localhost:65535;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # the rest of you server code
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
