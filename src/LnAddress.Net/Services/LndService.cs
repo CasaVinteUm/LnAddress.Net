@@ -63,6 +63,21 @@ public class LndService : ILightningService
         }
     }
 
+    public async Task<bool> CheckConnection()
+    {
+        try
+        {
+            var response = await _rpcClient.GetInfoAsync(new GetInfoRequest());
+            return response.SyncedToChain && response.SyncedToGraph;
+        }
+        catch (Exception e)
+        {
+            const string errorMessage = "Error fetching server info";
+            _logger.LogError(e, errorMessage);
+            throw new Exception(errorMessage);
+        }
+    }
+
     private Task AddMacaroon(AuthInterceptorContext context, Metadata metadata)
     {
         metadata.Add(new Metadata.Entry("macaroon", _macaroon));

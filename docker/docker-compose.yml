@@ -1,0 +1,26 @@
+services:
+  lnaddress.net:
+    image: ipmsio/lnaddress.net:latest
+    ports:
+      - "64260:80"
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Production
+      - LND__MACAROON=BASE64
+      - LND__CERT=BASE64
+      - LND__RPCADDRESS=https://your.lnd.address:10009
+      - INVOICE__MINSENDABLE=10000
+      - INVOICE__MAXSENDABLE=100000000
+      - INVOICE_MAXCOMMENTALLOWED=255
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  app-network:
+    driver: bridge
