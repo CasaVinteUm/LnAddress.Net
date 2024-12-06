@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace LnAddress.Net.Models.Responses;
 
-public class LnAddressWellKnownResponse(string callback, long maxSendableMillisats, long minSendableMillisats, string? tag = null)
+public class LnAddressWellKnownResponse(string callback, long minSendableMillisats, long maxSendableMillisats, string? tag = null)
 {
     /// <summary>
     /// The URL from LN SERVICE which will accept the pay request parameters

@@ -7,7 +7,7 @@ using Models.Responses;
 
 [ApiController]
 [Route("[controller]")]
-public class LnurlController(ILightningService lightningService) : ControllerBase
+public class LnUrlController(ILightningService lightningService) : ControllerBase
 {
     [HttpGet("callback/{username}")]
     public async Task<ActionResult<LnUrlCallbackResponse>> Get(string username, [FromQuery] long amount, [FromQuery] string? comment)

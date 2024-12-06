@@ -1,6 +1,9 @@
 @lnaddress_HostAddress = http://localhost:5180
 
-GET {{lnaddress_HostAddress}}/weatherforecast/
+GET {{lnaddress_HostAddress}}/lnurlp/{{$random.uuid}}
 Accept: application/json
 
 ###
+GET {{lnaddress_HostAddress}}/lnurl/callback/{{$random.uuid}}?amount=10000&comment=testing
+Accept: application/json
+
