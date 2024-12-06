@@ -21,7 +21,21 @@ builder.Services.Configure<RouteOptions>(options =>
 
 builder.Services.AddSingleton<ILightningService, LndService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .WithExposedHeaders("*");
+    });
+});
+
 var app = builder.Build();
+
+// Enable CORS before other middleware
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

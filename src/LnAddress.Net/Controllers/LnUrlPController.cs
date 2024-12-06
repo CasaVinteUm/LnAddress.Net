@@ -5,7 +5,7 @@ namespace LnAddress.Net.Controllers;
 using Models.Responses;
 
 [ApiController]
-[Route("[controller]")]
+[Route(".well-known/[controller]")]
 public class LnUrlPController(IConfiguration configuration) : ControllerBase
 {
     [HttpGet("{username}")]
@@ -15,8 +15,6 @@ public class LnUrlPController(IConfiguration configuration) : ControllerBase
         {
             // Get the host called
             var domain = Request.Host.Value;
-            // Get the scheme (http or https)
-            var scheme = Request.Scheme;
 
             if (!long.TryParse(configuration["Invoice:MinSendable"], out var minSendable))
             {
@@ -34,7 +32,7 @@ public class LnUrlPController(IConfiguration configuration) : ControllerBase
                 commentAllowed = commentAllowedFromConfig;
             }
             
-            return new LnAddressWellKnownResponse($"{scheme}://{domain}/lnurl/callback/{username}", minSendable, maxSendable)
+            return new LnAddressWellKnownResponse($"https://{domain}/lnurl/callback/{username}", minSendable, maxSendable)
                 .WithMetadata($"""[["text/plain","Paying {username}"]]""")
                 .WithCommentAllowed(commentAllowed);
         }
