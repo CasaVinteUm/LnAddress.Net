@@ -50,12 +50,12 @@ To enable Lightning payments, you need to connect LnAddress.Net to your LND inst
 
    Copy only the certificate portion without the header and footer lines.
 
-2. **Admin Macaroon**:
+2. **Invoice Macaroon**:
 
-   Convert the `admin.macaroon` to a single-line base64 string:
+   Convert the `invoice.macaroon` to a single-line base64 string:
 
    ```bash
-   base64 /.lnd/data/chain/bitcoin/mainnet/admin.macaroon | tr -d '\n'
+   base64 /.lnd/data/chain/bitcoin/mainnet/invoice.macaroon | tr -d '\n'
    ```
 
 3. **RPC Server URL**:
@@ -96,9 +96,9 @@ or, if running standalone:
 ```bash
 docker run -d \
   -p 80:80 \
-  -e LND_TLS_CERT="<base64_tls_cert>" \
-  -e LND_MACAROON="<base64_admin_macaroon>" \
-  -e LND_SERVER_URL="https://<lnd-ip>:10009" \
+  -e LND__CERT="<base64_tls_cert>" \
+  -e LND__MACAROON="<base64_admin_macaroon>" \
+  -e LND__RPCADDRESS="https://<lnd-ip>:10009" \
   ipmsio/lnaddress.net:latest
 ```
 
